@@ -1,0 +1,18 @@
+/* Theme colors */
+.gray { color: #3b4447; }
+.blue { color: rgb(33, 75, 184); }
+.red { color: #bf2222; }
+.orange { color: #E84A0C; }
+
+body {
+  font-size: 12pt;
+}
+
+.navbar-default .navbar-brand span {
+  font-family: 'Fredoka One', cursive;
+  text-shadow: 0 1px 0 #000;
+  font-size: 1.3rem;
+  font-weight: 100;
+  text-align: center;;
+  color: #fff;
+}
