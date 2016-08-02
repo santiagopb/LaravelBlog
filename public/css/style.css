@@ -6,13 +6,52 @@
 
 body {
   font-size: 12pt;
+  background-color: #bf2222;
 }
 
-.navbar-default .navbar-brand span {
+/* Menu superior */
+nav.navbar.navbar-inverse.navbar-fixed-top {
+  border-top: 1px solid #2d3235;
+  border-bottom: 0;
+  text-shadow: 0 1px 0 #000;
+  background: #3b4447;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+/* Link menu superior */
+nav.navbar.navbar-inverse.navbar-fixed-top a{
+  color: #fff;
+}
+#navbar-phone a{
+  font-size: 1.1rem;
+}
+#navbar-right a{
+  border-left: 5px solid #3b4447;
+  font-family: 'Oxigen', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+#navbar-right a:hover {
+  background-color: #2d3235;
+}
+#navbar-right .active > a {
+  background-color: #E84A0C;
+}
+
+/* Menu emergente */
+a.dropdown-toggle:hover{
+  background-color: #E84A0C;
+}
+ul.dropdown-menu {
+  background-color: #3b4447;
+}
+/* Logo */
+nav.navbar.navbar-inverse.navbar-fixed-top a.navbar-brand {
   font-family: 'Fredoka One', cursive;
   text-shadow: 0 1px 0 #000;
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: 100;
-  text-align: center;;
-  color: #fff;
 }

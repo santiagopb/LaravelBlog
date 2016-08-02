@@ -25,14 +25,17 @@
                   <tbody>
                       <td><a href="{{ route('post.edit', $post->id) }}" ><strong>{{ $post->title }}</strong></a>
                       <span class="help-block">
+                          {!! Form::open(array('route' => ['post.destroy', $post->id], 'method' => 'DELETE', 'id' => $post->id)) !!}
                           <small>
                             <a href="{{ route('post.edit', $post->id) }}">Editar</a>
                           | <a href="{{ route('post.show', $post->id) }}">Ver</a>
+                          | <a class="text-danger" href="#" onclick="document.getElementById({{$post->id}}).submit();">Borrar</a>
                         </small>
+                        {!! Form::close() !!}
                       </span>
                       </td>
                       <td>{{ $post->user->name }}</td>
-                      <td>{{ $post->category->name }}</td>
+                      <td>{{ $post->category ? $post->category->name : ''}}</td>
                       <td>
                         @foreach($post->tags as $tag)
                           <span class="label label-default">{{ $tag->name }}</span>

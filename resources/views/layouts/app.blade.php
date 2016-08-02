@@ -24,6 +24,7 @@
     <style>
         body {
             font-family: 'Lato';
+            padding-top: 70px;
         }
 
         .fa-btn {
@@ -32,7 +33,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -46,23 +47,26 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel Blog
+                    Cron<span class="red">TI</span>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li class="{{ Request::is('/home') ? 'active' : '' }}"><a href="{{ url('/home') }}">Home</a></li>
+                <ul class="nav navbar-nav" id="navbar-phone">
+                    <li><a><strong><i class="fa fa-phone" arial-hidden="true"></i> (+34) 652.14.9339</strong></a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="navbar-right">
+
+                    <!-- Link del menu -->
+                    @foreach($menu as $item)
+                        <li class="{{ Request::is($item->slug) ? 'active' : '' }}"><a href="{{ url($item->slug) }}">{{ $item->name }}</a></li>
+                    @endforeach
+
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li class="{{ Request::is('/1') ? 'active' : '' }}"><a href="#">Nosotros</a></li>
-                        <li class="{{ Request::is('/2') ? 'active' : '' }}"><a href="#">Servicios</a></li>
-                        <li class="{{ Request::is('/3') ? 'active' : '' }}"><a href="#">Desarrollos</a></li>
                         <li class="{{ Request::is('/4') ? 'active' : '' }}"><a href="{{ url('/login') }}">Iniciar Sesion</a></li>
                     @else
                         <li class="dropdown">
@@ -80,9 +84,6 @@
                 </ul>
             </div>
         </div>
-
-
-
 
     </nav>
 

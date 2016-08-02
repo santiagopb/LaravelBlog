@@ -5,12 +5,11 @@ namespace Cronti\Http\Controllers;
 use Illuminate\Http\Request;
 use Cronti\Http\Requests;
 use Cronti\Post;
-use Cronti\Category;
-use Cronti\Tag;
+use Cronti\Menu;
 use Auth;
 use Session;
 
-class PostController extends Controller
+class PageController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -61,8 +60,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('type', 'post')->orderBy('created_at', 'desc')->paginate(10);
-        return view('post.index')->withPosts($posts);
+        $pages = Post::where('type', 'page')->orderBy('created_at', 'desc')->paginate(10);
+        return view('page.index')->withPages($pages);
     }
 
     /**
@@ -72,9 +71,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view ('post.create')->withCategories($categories)->withTags($tags);
+        return view ('page.create');
     }
 
     /**
@@ -88,8 +85,6 @@ class PostController extends Controller
         // Validar la informacion
         $this->validate($request, array(
           'title' => 'required|max:255'
-          //'slug' => 'required|alpha_dash|min:3|max:255|unique:posts,slug',
-          //'body' => 'required'
         ));
 
         //Guardar la informacion
@@ -102,7 +97,7 @@ class PostController extends Controller
         }
         $post->body = $request->body;
         $post->user_id = Auth::user()->id;
-        $post->category_id = $request->category_id;
+        //$post->category_id = $request->category_id;
         $post->type = $request->type;
         $post->save();
         // Si no hay etiquetas pasamos un array vacio
@@ -111,7 +106,7 @@ class PostController extends Controller
 
         // Redirigir a otro lugar
         Session::flash('message','El Post fue guardado.');
-        return redirect()->route('post.edit', $post->id);
+        return redirect()->route('page.edit', $post->id);
     }
 
     /**
@@ -134,9 +129,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('post.edit')->withPost($post)->withCategories($categories)->withTags($tags);
+        return view('page.edit')->withPost($post);
     }
 
     /**
@@ -165,7 +158,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->body = $request->body;
-        $post->category_id = $request->category_id;
+        //$post->category_id = $request->category_id;
         $post->save();
         // Si no hay etiquetas pasamos un array vacio
         if (!isset($request->tags)) { $request->tags=array();}
@@ -173,7 +166,7 @@ class PostController extends Controller
 
         Session::flash('message', 'Post actualizado con exito.');
 
-        return redirect()->route('post.edit', $post->id);
+        return redirect()->route('page.edit', $post->id);
     }
 
     /**
@@ -189,18 +182,27 @@ class PostController extends Controller
         $post->delete();
 
         Session::flash('message', 'El post fue eliminado con exito.');
-        return redirect()->route('post.index');
+        return redirect()->route('page.index');
     }
 
-
+    /**
+     * Abre la pagina de Blog
+     */
     public function blog()
     {
         $posts = Post::orderBy('created_at','desc')->get();
-        return view('page.blog')->withPosts($posts);
+        $menu = Menu::orderBy('position', 'asc')->get();
+        return view('page.blog')->withPosts($posts)->withMenu($menu);
     }
 
-    public function dashboard()
+    public function page($slug)
     {
-        return view('page.dashboard');
+        $post = Post::where('slug', $slug)->first();
+        if (!isset( $post )){
+          return view('errors.503');
+        }
+        $menu = Menu::orderBy('position', 'asc')->get();
+        return view('page.single')->withPost($post)->withMenu($menu);
     }
+
 }
