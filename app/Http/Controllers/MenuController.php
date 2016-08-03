@@ -27,9 +27,10 @@ class MenuController extends Controller
      */
     public function index()
     {
-      $posts = Post::all();
+      $posts = Post::where('type', 'post')->get();
+      $pages = Post::where('type', 'page')->get();
       $menus = Menu::paginate(10);
-      return view ('menu.index')->withPosts($posts)->withMenus($menus);
+      return view ('menu.index')->withPosts($posts)->withPages($pages)->withMenus($menus);
     }
 
     /**

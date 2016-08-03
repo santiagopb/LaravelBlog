@@ -5,7 +5,13 @@
           <div class="col-md-12">
               <h3>
                 Menu
-              </h3><br>
+              </h3>
+          </div><!-- .col-md-12 -->
+      </div><!-- .row -->
+
+      <div class="row">
+          <div class="col-md-12">
+              <hr>
           </div><!-- .col-md-12 -->
       </div><!-- .row -->
 
@@ -21,9 +27,11 @@
               </div>
               <div class="panel-body">
                 @foreach($posts as $post)
-                {{ Form::checkbox('post[]', $post->id) }}
-                {{ $post->title }}
-                <br>
+                  <small>
+                  {{ Form::checkbox('post[]', $post->id) }}
+                  {{ $post->title }}
+                  <br>
+                  </small>
                 @endforeach
                 <hr>
                 <div class="text-right">{{ Form::submit('Anadir al menu', ['class' => 'btn btn-sm btn-default'])}}</div>
@@ -31,6 +39,24 @@
             </div>
             {!! Form::close() !!}
 
+            {!! Form::open(array('route' => 'menu.store')) !!}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Paginas</h3>
+              </div>
+              <div class="panel-body">
+                @foreach($pages as $post)
+                  <small>
+                  {{ Form::checkbox('post[]', $post->id) }}
+                  {{ $post->title }}
+                  <br>
+                  </small>
+                @endforeach</small>
+                <hr>
+                <div class="text-right">{{ Form::submit('Anadir al menu', ['class' => 'btn btn-sm btn-default'])}}</div>
+              </div>
+            </div>
+            {!! Form::close() !!}
 
             {!! Form::open(array('route' => 'menu.store')) !!}
             <div class="panel panel-default">

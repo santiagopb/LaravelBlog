@@ -61,9 +61,11 @@
                 <ul class="nav navbar-nav navbar-right" id="navbar-right">
 
                     <!-- Link del menu -->
+                    @if(isset($menu))
                     @foreach($menu as $item)
                         <li class="{{ Request::is($item->slug) ? 'active' : '' }}"><a href="{{ url($item->slug) }}">{{ $item->name }}</a></li>
                     @endforeach
+                    @endif
 
                     <!-- Authentication Links -->
                     @if (Auth::guest())

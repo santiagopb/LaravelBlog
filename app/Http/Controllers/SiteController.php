@@ -4,10 +4,11 @@ namespace Cronti\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Cronti\Http\Requests;
+use Auth;
 use Cronti\Post;
 use Cronti\Menu;
 
-class BlogController extends Controller
+class SiteController extends Controller
 {
     public function getSingle($slug) {
         $post = Post::where('slug', '=', $slug)->first();
@@ -40,4 +41,26 @@ class BlogController extends Controller
         return view('page.dashboard');
     }
 
+    public function typelogin()
+    {
+      if(Auth::user()){
+        if ( Auth::user()->hasRole('Administrador') ){
+          return view('page.dashboard');
+        }
+
+        if ( Auth::user()->hasRole('Colaborador') ){
+          return view('page.dashboard');
+        }
+
+        if ( Auth::user()->hasRole('Cliente') ){
+          return view('page.dashboard');
+        }
+
+        if ( Auth::user()->hasRole('Suscriptor') ){
+          return view('page.dashboard');
+        }
+      } else {
+        return view('errors.401');
+      }
+    }
 }

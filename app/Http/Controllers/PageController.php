@@ -18,7 +18,7 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'blog']);
+        $this->middleware('auth', ['except' => ['blog', 'page']]);
     }
 
     /**
@@ -185,24 +185,5 @@ class PageController extends Controller
         return redirect()->route('page.index');
     }
 
-    /**
-     * Abre la pagina de Blog
-     */
-    public function blog()
-    {
-        $posts = Post::orderBy('created_at','desc')->get();
-        $menu = Menu::orderBy('position', 'asc')->get();
-        return view('page.blog')->withPosts($posts)->withMenu($menu);
-    }
-
-    public function page($slug)
-    {
-        $post = Post::where('slug', $slug)->first();
-        if (!isset( $post )){
-          return view('errors.503');
-        }
-        $menu = Menu::orderBy('position', 'asc')->get();
-        return view('page.single')->withPost($post)->withMenu($menu);
-    }
 
 }

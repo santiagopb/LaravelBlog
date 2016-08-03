@@ -5,6 +5,7 @@ namespace Cronti\Http\Controllers;
 use Illuminate\Http\Request;
 use Cronti\Http\Requests;
 use Cronti\Category;
+use Cronti\Post;
 use Auth;
 use Session;
 
@@ -112,16 +113,13 @@ class CategoryController extends Controller
             ]);
         }
 
-
-
         $category->name = $request->name;
         $category->slug = $request->slug;
         $category->description = $request->description;
         $category->save();
 
         Session::flash('message', 'Categoria modificada!');
-        $categories = Category::paginate(10);
-        return view ('category.index')->withCategories($categories);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -133,10 +131,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
       $category = Category::find($id);
-      //$category->delete();
+      $posts = Post::where('category_id', $id);
+      foreach($posts as $post){
+        $post->category_id = null;
+        $post->save();
+      }
+
+      $category->delete();
 
       Session::flash('message', 'Categoria eliminada');
-      $categories = Category::paginate(10);
-      return view ('category.index')->withCategories($categories);
+      return redirect()->route('category.index');
     }
 }

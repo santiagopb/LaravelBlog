@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             //$table->foreign('category_id')->references('id')->on('categories');
             $table->string('type');
+            $table->string('img')->nullable();
             $table->softDeletes();
         });
     }

@@ -54,10 +54,10 @@
     <a href="#"><i class="fa fa-users" aria-hidden="true"></i> Usuarios<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
-            <a href="{{ url('/genero/create') }}"><small> Todos los usuarios</small></a>
+            <a href="{{ url('/user') }}"><small> Todos los usuarios</small></a>
         </li>
         <li>
-            <a href="{{ url('/genero') }}"><small> Anadir nuevo</small></a>
+            <a href="{{ url('/user/create') }}"><small> Anadir nuevo</small></a>
         </li>
     </ul>
 </li>

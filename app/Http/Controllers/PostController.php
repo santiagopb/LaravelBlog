@@ -192,15 +192,4 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
-
-    public function blog()
-    {
-        $posts = Post::orderBy('created_at','desc')->get();
-        return view('page.blog')->withPosts($posts);
-    }
-
-    public function dashboard()
-    {
-        return view('page.dashboard');
-    }
 }

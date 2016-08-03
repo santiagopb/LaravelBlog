@@ -5,7 +5,13 @@
           <div class="col-md-12">
               <h3>
                 Etiquetas
-              </h3><br>
+              </h3>
+          </div><!-- .col-md-12 -->
+      </div><!-- .row -->
+
+      <div class="row">
+          <div class="col-md-12">
+              <hr>
           </div><!-- .col-md-12 -->
       </div><!-- .row -->
 

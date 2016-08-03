@@ -10,20 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*
-Route::get('/', function () {
-
-    return view('page.welcome');
-});*/
+//Patron
 Route::pattern('slug', '[\w\d\-\_]+');
 
-
-
-
-Route::get('/dashboard', 'PostController@dashboard');
-Route::get('blog/{slug}', ['as'=>'blog.single', 'uses' => 'BlogController@getSingle'])
-->where('slug', '[\w\d\-\_]+');
+//Post
 Route::resource('post', 'PostController');
+
+//Paginas
 Route::resource('page', 'PageController');
 
 //Categorias
@@ -35,20 +28,20 @@ Route::resource('tag', 'TagController', ['except' => ['create']]);
 //Comentarios
 Route::resource('comment', 'CommentController');
 
-//menu
+//Menu
 Route::resource('menu', 'MenuController');
+
+//Usuarios
+Route::resource('user', 'UserController');
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
-
+//Route::get('/home', 'HomeController@index');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
-Route::get('prueba', function() {
-  return view ('layouts.backend');
-});
-
-
-Route::get('/', 'PageController@blog');
-Route::get('/{slug}', 'PageController@page');
+Route::get('/', 'SiteController@blog');
+Route::get('/typelogin', 'SiteController@typelogin');
+Route::get('blog/{slug}', ['as'=>'blog.single', 'uses' => 'SiteController@getSingle'])->where('slug', '[\w\d\-\_]+');
+Route::get('/dashboard', 'SiteController@dashboard');
+Route::get('/{slug}', 'SiteController@page'); //DEBE SER EL ULTIMO
