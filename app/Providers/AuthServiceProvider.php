@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'Cronti\Model' => 'Cronti\Policies\ModelPolicy',
+        'Cronti\Post' => 'Cronti\Policies\PostPolicy',
     ];
 
     /**

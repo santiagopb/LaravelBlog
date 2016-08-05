@@ -22,6 +22,7 @@
                       <th>Fecha</th>
                   </thead>
                   @foreach($posts as $post)
+                  @can('owner', $post)
                   <tbody>
                       <td><a href="{{ route('post.edit', $post->id) }}" ><strong>{{ $post->title }}</strong></a>
                       <span class="help-block">
@@ -43,6 +44,7 @@
                       </td>
                       <td><small>Publicada <br> {{ date('j/m/Y', strtotime($post->created_at)) }}</small></td>
                   </tbody>
+                  @endcan
                   @endforeach
               </table><!-- .table -->
               <div class="text-center">{!! $posts->links() !!}</div>

@@ -31,33 +31,10 @@
 </li>
 
 <li>
-    <a href="#"><i class="fa fa-file" aria-hidden="true"></i> Paginas<span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level">
-        <li>
-            <a href="{{ url('/page') }}"><small> Todas las paginas</small></a>
-        </li>
-        <li>
-            <a href="{{ url('/page/create') }}"><small> Anadir nueva</small></a>
-        </li>
-    </ul>
-</li>
-
-<li>
     <a href="{{ url('/comment')}}"><i class="fa fa-comment" aria-hidden="true"></i> Comentarios</a>
 </li>
 
 <li>
-    <a href="{{ url('/menu')}}"><i class="fa fa-bars" aria-hidden="true"></i> Menus</a>
-</li>
+    <a href="#"><i class="fa fa-users" aria-hidden="true"></i> Perfil</a>
 
-<li>
-    <a href="#"><i class="fa fa-users" aria-hidden="true"></i> Usuarios<span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level">
-        <li>
-            <a href="{{ url('/user') }}"><small> Todos los usuarios</small></a>
-        </li>
-        <li>
-            <a href="{{ url('/user/create') }}"><small> Anadir nuevo</small></a>
-        </li>
-    </ul>
 </li>

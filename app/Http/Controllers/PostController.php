@@ -7,6 +7,7 @@ use Cronti\Http\Requests;
 use Cronti\Post;
 use Cronti\Category;
 use Cronti\Tag;
+use Cronti\Media;
 use Auth;
 use Session;
 
@@ -19,7 +20,8 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'blog']);
+        $this->middleware('auth');
+        $this->middleware('roles:Administrador,Colaborador');
     }
 
     /**
@@ -74,7 +76,8 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view ('post.create')->withCategories($categories)->withTags($tags);
+        $medias = Media::all();
+        return view ('post.create')->withCategories($categories)->withTags($tags)->withMedias($medias);
     }
 
     /**
@@ -149,6 +152,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        $this->authorize('owner', $post);
 
         // Si el slug no cambia
         if ($request->slug == $post->slug){
@@ -185,6 +189,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $this->authorize('owner', $post);
+        
         $post->tags()->detach();
         $post->delete();
 

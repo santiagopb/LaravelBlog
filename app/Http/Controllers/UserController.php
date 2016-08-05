@@ -120,27 +120,22 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($request->password == $user->password){
+        $this->validate($request, [
+          'name' => 'required|max:255',
+          'email' => "required|min:3|max:255|unique:users,email,$user->id"
+        ]);
+
+        if($request->password != ""){
             $this->validate($request, [
-              'name' => 'required|max:255',
-              //'email' => 'required|min:3|max:255|unique:users,email'
+              'password' => 'required|min:6'
             ]);
-        } else {
-            $this->validate($request, [
-              'name' => 'required|max:255',
-              //'email' => 'required|min:6|max:255|unique:users,email',
-              //'password' => 'required|min:6'
-            ]);
+            $user->password = bcrypt($request->password);
         }
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
         if($request->hasFile('avatar')){
-            //Eliminar la imagen anterior si no es default.jpg
-            // ----Por hacer
             if ($user->avatar!='default.jpg'){
-              //dd(public_path('/uploads/avatars/' . $user->avatar));
                 File::delete(public_path('/uploads/avatars/' . $user->avatar));
             }
             $avatar = $request->file('avatar');

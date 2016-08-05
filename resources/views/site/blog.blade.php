@@ -3,16 +3,8 @@
 @section('title', 'Pagina de bienvenida!!!')
 
 @section('content')
+@include('site.partials._slide')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron">
-                <h1>Mi primer blog 1.0</h1>
-                <p class="lead">Esta es la primera version de blog funcional</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-            </div>
-        </div><!-- .col-md-12 -->
-    </row><!-- .row -->
 
     <div class="row">
         <div class="col-md-7 col-md-offset-1">

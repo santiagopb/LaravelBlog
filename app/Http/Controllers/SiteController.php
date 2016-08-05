@@ -12,6 +12,9 @@ class SiteController extends Controller
 {
     public function getSingle($slug) {
         $post = Post::where('slug', '=', $slug)->first();
+        if (!isset( $post )){
+            return view('errors.503');
+        }
         return view('post.single')->withPost($post);
     }
 
@@ -22,7 +25,7 @@ class SiteController extends Controller
     {
         $posts = Post::where('type', 'post')->orderBy('created_at','desc')->get();
         $menu = Menu::orderBy('position', 'asc')->get();
-        return view('page.blog')->withPosts($posts)->withMenu($menu);
+        return view('site.blog')->withPosts($posts)->withMenu($menu);
     }
 
     public function page($slug)
@@ -53,11 +56,11 @@ class SiteController extends Controller
         }
 
         if ( Auth::user()->hasRole('Cliente') ){
-          return view('page.dashboard');
+          return redirect()->back();
         }
 
         if ( Auth::user()->hasRole('Suscriptor') ){
-          return view('page.dashboard');
+          return redirect()->back();
         }
       } else {
         return view('errors.401');

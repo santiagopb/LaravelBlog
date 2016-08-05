@@ -5,7 +5,15 @@
 @section('stylesheets')
   {!! Html::style('css/select2.min.css') !!}
    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-   <script>tinymce.init({ selector:'textarea', menubar:false , plugins: "link" });</script>
+   <script>tinymce.init({ selector:'textarea', menubar:false , plugins: "link image code",
+   toolbar: " styleselect | bold italic | link image | alignjustify alignleft aligncenter alignright | bullist numlist | outdent indent | charmap code",
+   image_list: [
+     @foreach($medias as $media)
+     {title: "{{ $media->title }}", value: "{{ url('/uploads/media/'. $media->media) }}"},
+     @endforeach
+    ]
+
+  });</script>
 @endsection
 
 @section('content')
@@ -32,7 +40,6 @@
 
                   <br>
 
-                  {{ Form::file('image') }}
                   <span class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                   {{ Form::textarea('body', null, array('class' => 'form-control')) }}
                   @if ($errors->has('body'))
@@ -90,7 +97,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Imagen destacada</strong></div>
                 <div class="panel-body">
-                    <strong>Aun sin cerar:</strong>--
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label class="btn btn-default btn-file">
+                        Seleccionar
+                        {{ Form::file('img', ['style' => 'display: none;']) }}
+                      </label>
+                    </span>
+                    <input type="text" readonly class="form-control" placeholder="...">
+                  </div><!-- /input-group -->
                 </div>
             </div>
 
@@ -106,4 +121,44 @@
       $(".select2").select2();
     });
   </script>
+
+  <script>
+  $(function() {
+
+    // We can attach the `fileselect` event to all file inputs on the page
+    $(document).on('change', ':file', function() {
+      var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+       input.trigger('fileselect', [numFiles, label]);
+    });
+
+    // We can watch for our custom `fileselect` event like this
+    $(document).ready( function() {
+        $(':file').on('fileselect', function(event, numFiles, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+            if( input.length ) {
+                input.val(log);
+            } else {
+                if( log ) alert(log);
+            }
+
+        });
+    });
+
+  });
+  </script>
+
+<script>
+  function newImagen(url,ancho,alto) {
+    var posicion_x;
+    var posicion_y;
+    posicion_x=(screen.width/2)-(ancho/2);
+    posicion_y=(screen.height/2)-(alto/2);
+    window.open(url, "leonpurpura.com", "width="+ancho+",height="+alto+",titlebar=0,menubar=0,toolbar=0,directories=0,scrollbars=no,resizable=no,left="+posicion_x+",top="+posicion_y+"");
+  }
+</script>
 @endsection

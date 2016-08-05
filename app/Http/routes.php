@@ -16,6 +16,9 @@ Route::pattern('slug', '[\w\d\-\_]+');
 //Post
 Route::resource('post', 'PostController');
 
+//Medios
+Route::resource('media', 'MediaController');
+
 //Paginas
 Route::resource('page', 'PageController');
 

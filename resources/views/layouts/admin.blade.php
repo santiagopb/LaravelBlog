@@ -71,7 +71,11 @@
             <div class="navbar-default sidebar" role="navigation" style="float:left;">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        @include('layouts.partials._admin_menu')
+                        @if(Auth::user()->hasRole('Administrador'))
+                            @include('layouts.partials._admin_menu')
+                        @elseif(Auth::user()->hasRole('Colaborador'))
+                            @include('layouts.partials._colab_menu')
+                        @endif
                     </ul>
                 </div>
             </div>
