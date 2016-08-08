@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('title', '| Todos los Post')
+@extends('layouts.site')
+@section('title', '| Todos los Comentarios')
 @section('content')
       <div class="row">
           <div class="col-md-12">

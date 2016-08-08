@@ -107,6 +107,7 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->category_id = $request->category_id;
         $post->type = $request->type;
+        $post->type = $request->img;
         $post->save();
         // Si no hay etiquetas pasamos un array vacio
         if (!isset($request->tags)) { $request->tags=array();}
@@ -139,7 +140,11 @@ class PostController extends Controller
         $post = Post::find($id);
         $categories = Category::all();
         $tags = Tag::all();
-        return view('post.edit')->withPost($post)->withCategories($categories)->withTags($tags);
+        $medias = Media::all();
+        $posts = Post::all();
+        $uri="http://$_SERVER[HTTP_HOST]/blog/public/";
+        return view('post.edit')->withPost($post)->withCategories($categories)->withTags($tags)
+        ->withMedias($medias)->withPosts($posts)->withUri($uri);
     }
 
     /**
@@ -170,6 +175,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->body = $request->body;
         $post->category_id = $request->category_id;
+        $post->img = $request->img;
         $post->save();
         // Si no hay etiquetas pasamos un array vacio
         if (!isset($request->tags)) { $request->tags=array();}
@@ -190,7 +196,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $this->authorize('owner', $post);
-        
+
         $post->tags()->detach();
         $post->delete();
 

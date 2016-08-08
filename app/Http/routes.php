@@ -37,9 +37,15 @@ Route::resource('menu', 'MenuController');
 //Usuarios
 Route::resource('user', 'UserController');
 
+//Productos
+Route::resource('product', 'ProductController');
+
+//Carro de compras
+Route::get('addtocart/{id}', ['as' => 'addtocart', 'uses' => 'SiteController@addtocart']);
+Route::get('showcart', ['as' => 'showcart', 'uses' => 'SiteController@showcart']);
+
 Route::auth();
 
-//Route::get('/home', 'HomeController@index');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 

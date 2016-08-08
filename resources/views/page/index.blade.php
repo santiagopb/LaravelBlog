@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.site')
 @section('title', '| Todos las Paginas')
 @section('content')
       <div class="row">

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.site')
 @section('title', '| Menus')
 @section('content')
       <div class="row">

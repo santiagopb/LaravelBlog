@@ -1,19 +1,37 @@
-@extends('layouts.admin')
+@extends('layouts.site')
 
 @section('title', '| Nuevo post')
 
 @section('stylesheets')
   {!! Html::style('css/select2.min.css') !!}
    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-   <script>tinymce.init({ selector:'textarea', menubar:false , plugins: "link image code",
-   toolbar: " styleselect | bold italic | link image | alignjustify alignleft aligncenter alignright | bullist numlist | outdent indent | charmap code",
+   <script>tinymce.init({ selector:'textarea', menubar:false , plugins: "link image code textcolor colorpicker preview",
+   toolbar: "image | styleselect | bold italic | forecolor backcolor | link | alignjustify alignleft aligncenter alignright | bullist numlist | outdent indent | preview | code",
+   relative_urls: false,
+   remove_script_host: false,
+   image_dimensions: true,
    image_list: [
      @foreach($medias as $media)
-     {title: "{{ $media->title }}", value: "{{ url('/uploads/media/'. $media->media) }}"},
+     {title: "{{ $media->title }}", value: "{{ $uri . 'uploads/media/'. $media->media }}"},
      @endforeach
-    ]
-
-  });</script>
+   ],
+   style_formats: [
+   {title: 'Image Left', selector: 'img', styles: {
+     'float' : 'left',
+     'margin': '0 10px 0 10px'
+   }},
+   {title: 'Image Right', selector: 'img', styles: {
+     'float' : 'right',
+     'margin': '0 10px 0 10px'
+   }}
+   ],
+   link_list: [
+     @foreach($posts as $postToLink)
+     {title: "{{ $postToLink->title }}", value: "{{ $uri . ($postToLink->type=='post' ? 'blog/' : '') . $postToLink->slug }}"},
+     @endforeach
+   ]
+   });
+  </script>
 @endsection
 
 @section('content')
@@ -97,15 +115,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Imagen destacada</strong></div>
                 <div class="panel-body">
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <label class="btn btn-default btn-file">
-                        Seleccionar
-                        {{ Form::file('img', ['style' => 'display: none;']) }}
-                      </label>
-                    </span>
-                    <input type="text" readonly class="form-control" placeholder="...">
-                  </div><!-- /input-group -->
+                  {{ Form::select('img', $medias->lists('title', 'media'), null, ['class' => 'form-control', 'placeholder' => 'Selecciona una imagen']) }}
                 </div>
             </div>
 

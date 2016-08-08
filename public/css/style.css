@@ -4,11 +4,57 @@
 .red { color: #bf2222; }
 .orange { color: #E84A0C; }
 
-body {
-  font-size: 12pt;
-  padding-top: 50px;
-  background-color: #bf2222;
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  height: 100%;
+  font-size: 12pt;
+  background-color: #bf2222;
+  font-family: 'Raleway', helvetica, arial, sans-serif;
+}
+
+div#page-full {
+  height: 100%;
+}
+div#vertical-align {
+  padding-top: 10%;
+}
+
+.shadow {
+  text-shadow: 0 1px 0 #000;
+}
+
+h1.blank {
+  font-family: 'Raleway', helvetica, arial, sans-serif;
+  font-size: 3em;
+  font-weight: 500;
+  color: #fff;
+  line-height: 50px;
+}
+
+p.blank {
+  line-height: 25px;
+  font-family: 'Raleway', helvetica, arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #fff;
+}
+
+.btn-cr {
+  background-color: #2C83BF;
+  border: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  color: #fff;
+}
+
 
 /* Menu superior */
 nav.navbar.navbar-inverse.navbar-fixed-top {

@@ -24,6 +24,7 @@
     <style>
         body {
             font-family: 'Lato';
+            padding-top: 50px;
         }
 
         .fa-btn {
@@ -68,7 +69,11 @@
 
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li class="{{ Request::is('/4') ? 'active' : '' }}"><a href="{{ url('/login') }}">Iniciar Sesion</a></li>
+                        <li class="{{ Request::is('/4') ? 'active' : '' }}"><a href="{{ url('/showcart') }}" >
+                          <i class="fa fa-shopping-cart" arial-hidden=true></i>
+                          <span class="badge">{{ Session::has('cart')?Session::get('cart')->totalQty:''}}</span>
+                        </a></li>
+                        <li class="{{ Request::is('/4') ? 'active' : '' }}"><a href="{{ url('/login') }}" alt="Iniciar sesion"><i class="fa fa-btn fa-sign-in"></i></a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
@@ -77,8 +82,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Perfil</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
                             </ul>
                         </li>
                     @endif
@@ -88,10 +93,10 @@
 
     </nav>
 
-    <div id="page-wrapper">
-    @include('alerts._messages')
+    <!--<div id="page-wrapper">-->
+    <!--@ include('alerts._messages')-->
     @yield('content')
-    </div>
+    <!--</div>-->
 
     <footer style="background-color: #eee;">
         <span id="copyright" class="text-center">Un tema <strong>Cron<span class="red">TI</span></strong></span>

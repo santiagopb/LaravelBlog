@@ -166,7 +166,11 @@ class UserController extends Controller
     public function destroy($id)
     {
       $user = User::find($id);
+      if ($user->avatar!='default.jpg'){
+          File::delete(public_path('/uploads/avatars/' . $user->avatar));
+      }
       $user->delete();
+
 
       Session::flash('message', 'Usuario eliminado');
       return redirect()->route('user.index');

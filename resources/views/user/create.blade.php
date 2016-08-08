@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.site')
 @section('title', '| Todas las categorias')
 @section('content')
       <div class="row">

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.site')
 @section('title', '| Editar menu')
 @section('content')
       <div class="row">
@@ -76,7 +76,7 @@
           </div>
       </div><!-- .row -->
       <br>
-      
+
       {{ Form::submit('Actualizar', ['class' => 'btn btn-sm btn-primary'])}}
       {!! Form::close() !!}
 @endsection
