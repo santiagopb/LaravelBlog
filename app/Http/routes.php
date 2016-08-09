@@ -37,8 +37,15 @@ Route::resource('menu', 'MenuController');
 //Usuarios
 Route::resource('user', 'UserController');
 
+//////////////////////////////////////////Sales
 //Productos
 Route::resource('product', 'ProductController');
+
+//Client
+Route::resource('client', 'ClientController');
+
+//Budget
+Route::resource('budget', 'BudgetController');
 
 //Carro de compras
 Route::get('addtocart/{id}', ['as' => 'addtocart', 'uses' => 'SiteController@addtocart']);

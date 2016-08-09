@@ -5,6 +5,7 @@ namespace Cronti;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cronti\Role;
+use Cronti\User;
 
 class User extends Authenticatable
 {
@@ -59,6 +60,7 @@ class User extends Authenticatable
       if($this->roles()->where('name', $role)->first()){ return true; }
       return false;
     }
+
 
     /**
      * The attributes that should be mutated to dates.
